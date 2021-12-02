@@ -29,6 +29,7 @@ func main() {
 	parsedInput := ParseInput(inputs)
 
 	fmt.Printf("Result of multiplying horizontal and vertical position: %d\n", CalculatePosition(parsedInput))
+	fmt.Printf("Result of multiplying horizontal and vertical position (Part 2): %d\n", CalculatePositionPart2(parsedInput))
 }
 
 func CalculatePosition(navigations []Navigation) (multiplyResult int) {
@@ -43,6 +44,29 @@ func CalculatePosition(navigations []Navigation) (multiplyResult int) {
 			vertical = vertical + nav.Value
 		case "up":
 			vertical = vertical - nav.Value
+		}
+	}
+
+	return horizontal * vertical
+}
+
+func CalculatePositionPart2(navigations []Navigation) (multiplyResult int) {
+	horizontal := 0
+	vertical := 0
+	aim := 0
+
+	for _, nav := range navigations {
+		switch nav.Action {
+		case "forward":
+			horizontal = horizontal + nav.Value
+			if aim > 0 {
+				aim := nav.Value * aim
+				vertical += aim
+			}
+		case "down":
+			aim = aim + nav.Value
+		case "up":
+			aim = aim - nav.Value
 		}
 	}
 
