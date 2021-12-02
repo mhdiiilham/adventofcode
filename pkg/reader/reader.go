@@ -9,7 +9,7 @@ import (
 
 type reader struct {
 	FilePath  string
-	rawResult []string
+	RawResult []string
 }
 
 func NewReader(filepath string) *reader {
@@ -25,12 +25,12 @@ func (r *reader) ReadInput() (err error) {
 		return
 	}
 
-	r.rawResult = strings.Split(string(b), "\n")
+	r.RawResult = strings.Split(string(b), "\n")
 	return nil
 }
 
 func (r *reader) GetResultAsSliceOfInt() (results []int, err error) {
-	for _, in := range r.rawResult {
+	for _, in := range r.RawResult {
 		var i int
 		i, err = strconv.Atoi(in)
 		if err != nil {
