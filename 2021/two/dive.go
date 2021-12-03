@@ -1,42 +1,31 @@
-package main
+package two
 
 import (
-	"flag"
-	"fmt"
 	"strconv"
 	"strings"
-
-	"github.com/mhdiiilham/adventofcode/pkg/reader"
 )
 
-type Navigation struct {
-	Action string
-	Value  int
-}
-
-func main() {
-	fmt.Println("advent of code day: 2")
-	file := flag.String("file", "", "to read advent of puzzle input")
-	flag.Parse()
-
-	r := reader.NewReader(*file)
-	err := r.ReadInput()
-	if err != nil {
-		panic(err)
+type (
+	Navigation struct {
+		Action string
+		Value  int
 	}
 
-	inputs := r.RawResult
-	parsedInput := ParseInput(inputs)
+	dive struct {
+		Navigations []Navigation
+	}
+)
 
-	fmt.Printf("Result of multiplying horizontal and vertical position: %d\n", CalculatePosition(parsedInput))
-	fmt.Printf("Result of multiplying horizontal and vertical position (Part 2): %d\n", CalculatePositionPart2(parsedInput))
+func NewDive(rawPuzzleInput []string) *dive {
+	navigations := ParseInput(rawPuzzleInput)
+	return &dive{Navigations: navigations}
 }
 
-func CalculatePosition(navigations []Navigation) (multiplyResult int) {
+func (d *dive) CalculatePosition() (multiplyResult int) {
 	horizontal := 0
 	vertical := 0
 
-	for _, nav := range navigations {
+	for _, nav := range d.Navigations {
 		switch nav.Action {
 		case "forward":
 			horizontal = horizontal + nav.Value
@@ -50,12 +39,12 @@ func CalculatePosition(navigations []Navigation) (multiplyResult int) {
 	return horizontal * vertical
 }
 
-func CalculatePositionPart2(navigations []Navigation) (multiplyResult int) {
+func (d *dive) CalculatePositionPart2() (multiplyResult int) {
 	horizontal := 0
 	vertical := 0
 	aim := 0
 
-	for _, nav := range navigations {
+	for _, nav := range d.Navigations {
 		switch nav.Action {
 		case "forward":
 			horizontal = horizontal + nav.Value

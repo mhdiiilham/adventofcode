@@ -42,3 +42,8 @@ func (r *reader) GetResultAsSliceOfInt() (results []int, err error) {
 
 	return
 }
+
+func (r *reader) SetFileInput(filePath string) *reader {
+	r.FilePath = filePath
+	return r
+}
