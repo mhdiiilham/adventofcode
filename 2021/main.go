@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/mhdiiilham/adventofcode/2021/binarydiagnostic"
 	"github.com/mhdiiilham/adventofcode/2021/dive"
 	"github.com/mhdiiilham/adventofcode/2021/sonarsweep"
 	"github.com/mhdiiilham/adventofcode/pkg/reader"
@@ -34,6 +35,16 @@ func main() {
 	Dive := dive.NewDive(readerTwo.RawResult)
 	fmt.Printf("Result of multiplying horizontal and vertical position: %d\n", Dive.CalculatePosition())
 	fmt.Printf("Result of multiplying horizontal and vertical position (Part 2): %d\n\n", Dive.CalculatePositionPart2())
+
+	fmt.Println("=== Day: 3 ===")
+	readerThree := r.SetFileInput("input/2021/three.txt")
+	if err := readerThree.ReadInput(); err != nil {
+		log.Printf("[ERROR] - reading day three puzzle input: %v\n", err)
+	}
+
+	diagnoster := binarydiagnostic.NewDiagnoster(readerThree.RawResult)
+	fmt.Printf("power consumption of the submarine: %d\n", diagnoster.CalculatePowerConsumption())
+	fmt.Printf("submarine life support rating: %d\n\n", diagnoster.CalculateLifeSupportRating())
 
 	fmt.Println("===== [end of advent of code 2021] =====")
 }
