@@ -1,4 +1,4 @@
-package two
+package dive
 
 import (
 	"strconv"
