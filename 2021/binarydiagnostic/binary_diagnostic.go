@@ -72,16 +72,14 @@ func (d *diagnoster) CalculatePowerConsumption() int64 {
 }
 
 func (d *diagnoster) CalculateLifeSupportRating() (rating int64) {
-	oxygenGeneratorRatingBits := d.getOxygenGeneratorValue()
-	oxygenGeneratorRating, err := strconv.ParseInt(oxygenGeneratorRatingBits, 2, 64)
+	oxygenGeneratorRating, err := strconv.ParseInt(d.getOxygenGeneratorValue(), 2, 64)
 	if err != nil {
-		log.Printf("[ERROR] parsing oxygenGeneratorRatingBits to int: %v\n", err)
+		log.Printf("[ERROR] parsing d.getOxygenGeneratorValue() to int: %v\n", err)
 	}
 
-	getCO2ScrubberValue := d.getCO2ScrubberValue()
-	CO2ScrubberRating, err := strconv.ParseInt(getCO2ScrubberValue, 2, 64)
+	CO2ScrubberRating, err := strconv.ParseInt(d.getCO2ScrubberValue(), 2, 64)
 	if err != nil {
-		log.Printf("[ERROR] parsing oxygenGeneratorRatingBits to int: %v\n", err)
+		log.Printf("[ERROR] parsing d.getCO2ScrubberValue() to int: %v\n", err)
 	}
 
 	return oxygenGeneratorRating * CO2ScrubberRating
@@ -118,10 +116,6 @@ func (d *diagnoster) getOxygenGeneratorValue() (bit string) {
 			if len(tempBits) == 1 {
 				break
 			}
-		}
-
-		if len(tempBits) == 1 {
-			break
 		}
 	}
 
@@ -160,10 +154,6 @@ func (d *diagnoster) getCO2ScrubberValue() (bit string) {
 			if len(tempBits) == 1 {
 				break
 			}
-		}
-
-		if len(tempBits) == 1 {
-			break
 		}
 
 	}
