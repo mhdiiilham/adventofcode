@@ -2,6 +2,7 @@ package caloriecounting
 
 import (
 	"io/ioutil"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -9,6 +10,7 @@ import (
 type CalorieCounting struct {
 	InputSource  string
 	Calories     [][]int
+	SumCalories  []int
 	MostCalories int
 }
 
@@ -31,7 +33,37 @@ func (c *CalorieCounting) GetMostCalories() (mostCalories int) {
 	return c.MostCalories
 }
 
+func (c *CalorieCounting) GetTotalTopThreeCaloriesCarriedByElves() int {
+	c.SumAllCaloriesByElves().SortSumCaloriesByLargest()
+	topThree := c.SumCalories[:3]
+	sum := 0
+	for _, v := range topThree {
+		sum += v
+	}
+
+	return sum
+}
+
+func (c *CalorieCounting) SortSumCaloriesByLargest() *CalorieCounting {
+	sort.Sort(sort.Reverse(sort.IntSlice(c.SumCalories)))
+	return c
+}
+
+func (c *CalorieCounting) SumAllCaloriesByElves() *CalorieCounting {
+	for _, groupCalories := range c.Calories {
+		totalCalories := 0
+		for _, group := range groupCalories {
+			totalCalories += group
+		}
+		c.SumCalories = append(c.SumCalories, totalCalories)
+	}
+
+	return c
+}
+
 func (c *CalorieCounting) LoadCalories() (err error) {
+	c.Calories = [][]int{}
+
 	b, err := ioutil.ReadFile(c.InputSource)
 	if err != nil {
 		return err

@@ -30,6 +30,20 @@ func (suite *calorieCountingTestSuite) TestGetMostCalories() {
 	})
 }
 
+func (suite *calorieCountingTestSuite) TestGetTotalTopThreeCaloriesCarriedByElves() {
+	t := suite.T()
+
+	t.Run("success", func(t *testing.T) {
+		assertion := assert.New(t)
+
+		err := suite.calorieCounting.LoadCalories()
+		assertion.NoError(err)
+
+		totalTopThreeCaloriesCarriedByElves := suite.calorieCounting.GetTotalTopThreeCaloriesCarriedByElves()
+		assertion.Equal(45000, totalTopThreeCaloriesCarriedByElves)
+	})
+}
+
 func (suite *calorieCountingTestSuite) SetupTest() {
 	sourcePath := "../../input/2022/elf_calories_test.txt"
 	suite.calorieCounting = caloriecounting.NewCalorieCounting(sourcePath)
