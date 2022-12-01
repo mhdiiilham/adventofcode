@@ -69,26 +69,20 @@ func (c *CalorieCounting) LoadCalories() (err error) {
 	}
 
 	result := strings.Split(string(b), "\n\n")
-	if err := c.GroupingInput(result); err != nil {
-		return err
-	}
+	c.GroupingInput(result)
 
 	return nil
 }
 
-func (c *CalorieCounting) GroupingInput(i []string) (err error) {
+func (c *CalorieCounting) GroupingInput(i []string) {
 	for _, row := range i {
 		elfCalorie := []int{}
 		calories := strings.Split(row, "\n")
 		for _, calorie := range calories {
-			calorieInt, err := strconv.Atoi(calorie)
-			if err != nil {
-				elfCalorie = append(elfCalorie, 0)
-			}
+			calorieInt := 0
+			calorieInt, _ = strconv.Atoi(calorie)
 			elfCalorie = append(elfCalorie, calorieInt)
 		}
 		c.Calories = append(c.Calories, elfCalorie)
 	}
-
-	return nil
 }
