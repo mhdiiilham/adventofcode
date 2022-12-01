@@ -1,6 +1,7 @@
 package caloriecounting_test
 
 import (
+	"fmt"
 	"testing"
 
 	caloriecounting "github.com/mhdiiilham/adventofcode/2022/calorie-counting"
@@ -42,6 +43,17 @@ func (suite *calorieCountingTestSuite) TestGetTotalTopThreeCaloriesCarriedByElve
 		totalTopThreeCaloriesCarriedByElves := suite.calorieCounting.GetTotalTopThreeCaloriesCarriedByElves()
 		assertion.Equal(45000, totalTopThreeCaloriesCarriedByElves)
 	})
+}
+
+func (suite *calorieCountingTestSuite) TestFileNotExisr() {
+	t := suite.T()
+	assertion := assert.New(t)
+
+	expectedErr := fmt.Errorf("failed to read file: fake/path.txt")
+
+	calorieCounting := caloriecounting.NewCalorieCounting("fake/path.txt")
+	err := calorieCounting.LoadCalories()
+	assertion.Equal(expectedErr, err)
 }
 
 func (suite *calorieCountingTestSuite) SetupTest() {

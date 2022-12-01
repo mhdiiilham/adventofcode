@@ -1,6 +1,7 @@
 package caloriecounting
 
 import (
+	"fmt"
 	"io/ioutil"
 	"sort"
 	"strconv"
@@ -62,11 +63,9 @@ func (c *CalorieCounting) SumAllCaloriesByElves() *CalorieCounting {
 }
 
 func (c *CalorieCounting) LoadCalories() (err error) {
-	c.Calories = [][]int{}
-
 	b, err := ioutil.ReadFile(c.InputSource)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to read file: %s", c.InputSource)
 	}
 
 	result := strings.Split(string(b), "\n\n")
