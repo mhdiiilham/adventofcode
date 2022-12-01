@@ -24,7 +24,7 @@ func TestReadByLines(t *testing.T) {
 
 		assertion := assert.New(t)
 		result, err := input.ReadByLines(inputFile, input.OneEnter)
-		assertion.Equal(nil, result)
+		assertion.Empty(result)
 		assertion.Error(err)
 	})
 }
