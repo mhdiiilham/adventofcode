@@ -2,10 +2,11 @@ package caloriecounting
 
 import (
 	"fmt"
-	"io/ioutil"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/mhdiiilham/adventofcode/pkg/input"
 )
 
 type CalorieCounting struct {
@@ -63,13 +64,11 @@ func (c *CalorieCounting) SumAllCaloriesByElves() *CalorieCounting {
 }
 
 func (c *CalorieCounting) LoadCalories() (err error) {
-	b, err := ioutil.ReadFile(c.InputSource)
+	inputs, err := input.ReadByLines(c.InputSource, input.TwoEnter)
 	if err != nil {
-		return fmt.Errorf("failed to read file: %s", c.InputSource)
+		return fmt.Errorf("failed to read file %s", c.InputSource)
 	}
-
-	result := strings.Split(string(b), "\n\n")
-	c.GroupingInput(result)
+	c.GroupingInput(inputs)
 
 	return nil
 }

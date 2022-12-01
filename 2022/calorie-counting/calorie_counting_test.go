@@ -49,7 +49,7 @@ func (suite *calorieCountingTestSuite) TestFileNotExisr() {
 	t := suite.T()
 	assertion := assert.New(t)
 
-	expectedErr := fmt.Errorf("failed to read file: fake/path.txt")
+	expectedErr := fmt.Errorf("failed to read file fake/path.txt")
 
 	calorieCounting := caloriecounting.NewCalorieCounting("fake/path.txt")
 	err := calorieCounting.LoadCalories()
