@@ -9,7 +9,6 @@ import (
 // X -> rock
 // Y -> paper
 // Z -> scissors
-
 var (
 	Strenght = map[string]map[string]bool{
 		"X": {
@@ -27,27 +26,6 @@ var (
 	}
 
 	ShapeScore = map[string]int{"X": 1, "Y": 2, "Z": 3}
-
-	StrenghtPartTwo = map[string]map[string]string{
-		// Need to lose
-		"X": {
-			"X": "Z", // rock vs scissors
-			"Y": "X", // paper vs rock
-			"Z": "Y", // scissors vs rock
-		},
-		// draw
-		"Y": {
-			"X": "X",
-			"Y": "Y",
-			"Z": "Z",
-		},
-		// Need to win
-		"Z": {
-			"X": "Y", // rock vs scissors
-			"Y": "Z",
-			"Z": "X",
-		},
-	}
 )
 
 type RockPaperScissor struct {
@@ -127,8 +105,6 @@ func (rps *RockPaperScissor) CalculateRealInput() int {
 		action := value[1]
 
 		score := dict[action][enemy]
-		// fmt.Printf("%s Vs. %s = %d\n", enemy, action, score)
-		// time.Sleep(1 * time.Second)
 		totalScore += score
 	}
 
