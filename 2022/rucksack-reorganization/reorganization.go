@@ -78,37 +78,39 @@ func charToNumber(char string) int {
 func (r *Rucksack) GetSumOfBadgePrioritiesItem() int {
 	r.groupingElves()
 
-	found := []string{}
+	foundCh := make(chan string, len(r.ElvesGroup))
 	for i := 0; i < len(r.ElvesGroup); i++ {
-		matchesGroup := []string{}
-		firstGroup := r.ElvesGroup[i][0]
-		secondGroup := r.ElvesGroup[i][1]
-		thirdGroup := r.ElvesGroup[i][2]
-
-		pattern := fmt.Sprintf("[(%s)]", firstGroup)
-		re := regexp.MustCompile(pattern)
-		matches := re.FindAllStringSubmatch(secondGroup, -1)
-		for _, match := range matches {
-			matchesGroup = append(matchesGroup, match[0])
-		}
-
-		matchAll := []string{}
-		secondPattern := fmt.Sprintf("[(%s)]", strings.Join(matchesGroup, ""))
-		re = regexp.MustCompile(secondPattern)
-		matches = re.FindAllStringSubmatch(thirdGroup, -1)
-		for _, match := range matches {
-			matchAll = append(matchAll, match[0])
-		}
-
-		found = append(found, matchAll[0])
+		go r.findMatchesInGroup(i, foundCh)
 	}
 
 	result := 0
-	for _, f := range found {
-		result += charToNumber(f)
+	for i := 0; i < len(r.ElvesGroup); i++ {
+		char := <-foundCh
+		result += charToNumber(char)
 	}
 
 	return result
+}
+
+func (r *Rucksack) findMatchesInGroup(i int, matched chan<- string) {
+	matchesGroup := []string{}
+	firstGroup := r.ElvesGroup[i][0]
+	secondGroup := r.ElvesGroup[i][1]
+	thirdGroup := r.ElvesGroup[i][2]
+
+	pattern := fmt.Sprintf("[(%s)]", firstGroup)
+	re := regexp.MustCompile(pattern)
+	matches := re.FindAllString(secondGroup, -1)
+	matchesGroup = append(matchesGroup, matches...)
+
+	matchAll := []string{}
+	secondPattern := fmt.Sprintf("[(%s)]", strings.Join(matchesGroup, ""))
+	re = regexp.MustCompile(secondPattern)
+	matches = re.FindAllString(thirdGroup, -1)
+	matchAll = append(matchAll, matches...)
+
+	found := matchAll[0]
+	matched <- found
 }
 
 func (r *Rucksack) groupingElves() {

@@ -47,3 +47,14 @@ func BenchmarkGetSumOfThePrioritiesOfItems(b *testing.B) {
 		rucksack.GetSumOfThePrioritiesOfItems()
 	}
 }
+
+func BenchmarkGetSumOfBadgePrioritiesItem(b *testing.B) {
+	rucksack := rucksackreorganization.NewRucksack(input)
+	if err := rucksack.LoadInput(); err != nil {
+		b.FailNow()
+	}
+
+	for i := 0; i < b.N; i++ {
+		rucksack.GetSumOfBadgePrioritiesItem()
+	}
+}
