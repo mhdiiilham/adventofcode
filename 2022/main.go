@@ -7,6 +7,7 @@ import (
 	"github.com/fatih/color"
 	caloriecounting "github.com/mhdiiilham/adventofcode/2022/calorie-counting"
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
+	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
 )
 
 func main() {
@@ -35,5 +36,16 @@ func main() {
 	fixedTotalScore := rps.CalculateRealInput()
 	fmt.Printf("Total Score: %d\n", totalScore)
 	fmt.Printf("Fixed Total Score: %d\n", fixedTotalScore)
+	color.Blue("--------------------")
+
+	color.Green("2. Rucksack Reorganization")
+	rucksack := rucksackreorganization.NewRucksack("input/2022/rucksack_organization.txt")
+	if err := rucksack.LoadInput(); err != nil {
+		log.Fatalf("failed to load input: %v", err)
+	}
+	sumOfThePrioritiesItem := rucksack.GetSumOfThePrioritiesOfItems()
+	sumOfTheBadgePriorities := rucksack.GetSumOfBadgePrioritiesItem()
+	fmt.Printf("the sum of the priorities of those item types: %d\n", sumOfThePrioritiesItem)
+	fmt.Printf("the sum of the badge priorities of those item types: %d\n", sumOfTheBadgePriorities)
 	color.Blue("--------------------")
 }
