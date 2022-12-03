@@ -5,7 +5,6 @@ run:
 	go run $(shell date +"%Y")/main.go
 
 ## test command will run `go test` command.
-# but only on current year directory
 test:
 	go test -cover ./2022/... ./pkg/input/...
 
