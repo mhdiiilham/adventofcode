@@ -11,3 +11,10 @@ test:
 ## start command will run `start.sh` script
 start:
 	./start.sh
+
+bench:
+	go test -bench=. \
+	./2022/rucksack-reorganization \
+	-count 5 \
+	-benchmem \
+	-run=^#

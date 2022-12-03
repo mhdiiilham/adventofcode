@@ -9,11 +9,10 @@ import (
 )
 
 type Rucksack struct {
-	InputSource             string
-	Input                   []string
-	RuckSack                [][]string
-	ContainedInBothRucksack []string
-	ElvesGroup              [][]string
+	InputSource string
+	Input       []string
+	RuckSack    [][]string
+	ElvesGroup  [][]string
 }
 
 func NewRucksack(inputSource string) *Rucksack {
@@ -41,23 +40,28 @@ func (r *Rucksack) LoadInput() (err error) {
 }
 
 func (r *Rucksack) GetSumOfThePrioritiesOfItems() int {
+	containerCh := make(chan string, len(r.RuckSack))
+
 	for _, row := range r.RuckSack {
-
-		firstHalf := row[0]
-		secondHalf := row[1]
-
-		pattern := fmt.Sprintf("[(%s)]", firstHalf)
-		re := regexp.MustCompile(pattern)
-		matches := re.FindAllStringSubmatch(secondHalf, 1)
-		for _, match := range matches {
-			r.ContainedInBothRucksack = append(r.ContainedInBothRucksack, match...)
-		}
+		go r.findMatchingInOtherHalf(row, containerCh)
 	}
+
 	result := 0
-	for _, item := range r.ContainedInBothRucksack {
-		result += charToNumber(item)
+	for i := 0; i < len(r.RuckSack); i++ {
+		char := <-containerCh
+		result += charToNumber(char)
 	}
 	return result
+}
+
+func (r *Rucksack) findMatchingInOtherHalf(row []string, contaier chan<- string) {
+	firstHalf := row[0]
+	secondHalf := row[1]
+
+	pattern := fmt.Sprintf("[(%s)]", firstHalf)
+	re := regexp.MustCompile(pattern)
+	matches := re.FindAllString(secondHalf, -1)
+	contaier <- matches[0]
 }
 
 func charToNumber(char string) int {

@@ -36,3 +36,14 @@ func TestFailedReadInput(t *testing.T) {
 	err := rucksackreorganization.NewRucksack("").LoadInput()
 	assert.Error(t, err)
 }
+
+func BenchmarkGetSumOfThePrioritiesOfItems(b *testing.B) {
+	rucksack := rucksackreorganization.NewRucksack(input)
+	if err := rucksack.LoadInput(); err != nil {
+		b.FailNow()
+	}
+
+	for i := 0; i < b.N; i++ {
+		rucksack.GetSumOfThePrioritiesOfItems()
+	}
+}
