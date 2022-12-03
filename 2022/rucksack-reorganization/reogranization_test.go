@@ -30,5 +30,9 @@ func TestGetSumOfBadgePrioritiesItem(t *testing.T) {
 	expectedSum := 70
 	actualSum := rucksack.GetSumOfBadgePrioritiesItem()
 	assertion.Equal(expectedSum, actualSum)
+}
 
+func TestFailedReadInput(t *testing.T) {
+	err := rucksackreorganization.NewRucksack("").LoadInput()
+	assert.Error(t, err)
 }
