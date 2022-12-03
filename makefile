@@ -12,4 +12,3 @@ test:
 ## start command will run `start.sh` script
 start:
 	./start.sh
-
