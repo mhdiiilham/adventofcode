@@ -7,7 +7,7 @@ run:
 ## test command will run `go test` command.
 # but only on current year directory
 test:
-	go test -cover -v ./2022/... ./pkg/input/...
+	go test -cover ./2022/... ./pkg/input/...
 
 ## start command will run `start.sh` script
 start:
