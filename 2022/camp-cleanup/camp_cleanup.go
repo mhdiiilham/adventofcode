@@ -34,11 +34,8 @@ func (c *CampCleanup) GetNumbersOfAssignmentThatFullyContainsTheOtherPairAssignm
 		assignmentOne := strings.Split(assignment[0], "-")
 		assignmentTwo := strings.Split(assignment[1], "-")
 
-		assignmentOneRangeStart, _ := strconv.Atoi(assignmentOne[0])
-		assignmentOneRangeEnd, _ := strconv.Atoi(assignmentOne[1])
-
-		assignmentTwoRangeStart, _ := strconv.Atoi(assignmentTwo[0])
-		assignmentTwoRangeEnd, _ := strconv.Atoi(assignmentTwo[1])
+g		assignmentOneRangeStart, assignmentOneRangeEnd := getRangeStartEnd(assignmentOne)
+		assignmentTwoRangeStart, assignmentTwoRangeEnd := getRangeStartEnd(assignmentTwo)
 
 		// With help from my favorite girl
 		// https://www.tiktok.com/@richrachellll
@@ -57,15 +54,18 @@ func (c *CampCleanup) GetNumbersOfAssignmentPairsDoTheRangeOverlap() int {
 		assignmentOne := strings.Split(assignment[0], "-")
 		assignmentTwo := strings.Split(assignment[1], "-")
 
-		assignmentOneRangeStart, _ := strconv.Atoi(assignmentOne[0])
-		assignmentOneRangeEnd, _ := strconv.Atoi(assignmentOne[1])
-
-		assignmentTwoRangeStart, _ := strconv.Atoi(assignmentTwo[0])
-		assignmentTwoRangeEnd, _ := strconv.Atoi(assignmentTwo[1])
+		assignmentOneRangeStart, assignmentOneRangeEnd := getRangeStartEnd(assignmentOne)
+		assignmentTwoRangeStart, assignmentTwoRangeEnd := getRangeStartEnd(assignmentTwo)
 
 		if assignmentOneRangeStart <= assignmentTwoRangeEnd && assignmentTwoRangeStart <= assignmentOneRangeEnd {
 			result++
 		}
 	}
 	return result
+}
+
+func getRangeStartEnd(assignment []string) (start, end int) {
+	start, _ = strconv.Atoi(assignment[0])
+	end, _ = strconv.Atoi(assignment[1])
+	return
 }
