@@ -6,6 +6,7 @@ import (
 
 	"github.com/fatih/color"
 	caloriecounting "github.com/mhdiiilham/adventofcode/2022/calorie-counting"
+	campcleanup "github.com/mhdiiilham/adventofcode/2022/camp-cleanup"
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
 )
@@ -27,7 +28,7 @@ func main() {
 	fmt.Printf("Calories are those top three Elves carrying in total: %d\n", sumOfTopThreeCaloriesCarriedByTheElves)
 	color.Blue("--------------------")
 
-	color.Green("1. Rock Pape Scissors")
+	color.Green("2. Rock Pape Scissors")
 	rps, err := rockpaperscissor.NewRockPaperScissors("input/2022/rock_paper_scissors.txt").LoadInput()
 	if err != nil {
 		log.Fatalf("failed to load day 2 challenge's input: %v", err)
@@ -38,7 +39,7 @@ func main() {
 	fmt.Printf("Fixed Total Score: %d\n", fixedTotalScore)
 	color.Blue("--------------------")
 
-	color.Green("2. Rucksack Reorganization")
+	color.Green("3. Rucksack Reorganization")
 	rucksack := rucksackreorganization.NewRucksack("input/2022/rucksack_organization.txt")
 	if err := rucksack.LoadInput(); err != nil {
 		log.Fatalf("failed to load input: %v", err)
@@ -47,5 +48,17 @@ func main() {
 	sumOfTheBadgePriorities := rucksack.GetSumOfBadgePrioritiesItem()
 	fmt.Printf("the sum of the priorities of those item types: %d\n", sumOfThePrioritiesItem)
 	fmt.Printf("the sum of the badge priorities of those item types: %d\n", sumOfTheBadgePriorities)
+	color.Blue("--------------------")
+
+	color.Green("4. Camp Cleanup")
+	campCleanUp := campcleanup.NewCampCleanUp("input/2022/camp_cleanup.txt")
+	if err := campCleanUp.LoadInput(); err != nil {
+		log.Fatalf("faile to load camp cleanup input: %v", err)
+	}
+
+	numbersOfAssignmentThatFullyContainsTheOtherPairAssignment := campCleanUp.GetNumbersOfAssignmentThatFullyContainsTheOtherPairAssignment()
+	numbersOfAssignmentPairsDoTheRangeOverlap := campCleanUp.GetNumbersOfAssignmentPairsDoTheRangeOverlap()
+	fmt.Printf("total assignment pairs that does one range fully contain the other: %d\n", numbersOfAssignmentThatFullyContainsTheOtherPairAssignment)
+	fmt.Printf("total assignment pairs do the ranges overlap: %d\n", numbersOfAssignmentPairsDoTheRangeOverlap)
 	color.Blue("--------------------")
 }
