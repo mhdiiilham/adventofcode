@@ -34,3 +34,8 @@ func TestFixInputGetTotalScore(t *testing.T) {
 		assertion.Equal(expected, totalScore)
 	})
 }
+
+func TestInputNotFound(t *testing.T) {
+	_, errLoadInput := rockpaperscissor.NewRockPaperScissors("").LoadInput()
+	assert.Error(t, errLoadInput)
+}

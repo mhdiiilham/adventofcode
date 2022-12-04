@@ -32,3 +32,9 @@ func TestGetNumbersOfAssignmentPairsDoTheRangeOverlap(t *testing.T) {
 	actual := cc.GetNumbersOfAssignmentPairsDoTheRangeOverlap()
 	assertion.Equal(expected, actual)
 }
+
+func TestInputNotFound(t *testing.T) {
+	cc := campcleanup.NewCampCleanUp("")
+	errLoadInput := cc.LoadInput()
+	assert.Error(t, errLoadInput)
+}
