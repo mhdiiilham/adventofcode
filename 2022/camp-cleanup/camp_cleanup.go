@@ -34,7 +34,7 @@ func (c *CampCleanup) GetNumbersOfAssignmentThatFullyContainsTheOtherPairAssignm
 		assignmentOne := strings.Split(assignment[0], "-")
 		assignmentTwo := strings.Split(assignment[1], "-")
 
-g		assignmentOneRangeStart, assignmentOneRangeEnd := getRangeStartEnd(assignmentOne)
+		assignmentOneRangeStart, assignmentOneRangeEnd := getRangeStartEnd(assignmentOne)
 		assignmentTwoRangeStart, assignmentTwoRangeEnd := getRangeStartEnd(assignmentTwo)
 
 		// With help from my favorite girl
