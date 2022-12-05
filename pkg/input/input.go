@@ -5,17 +5,17 @@ import (
 	"strings"
 )
 
-type InputSeperator string
+type InputSeparator string
 
 var (
-	OneEnter InputSeperator = "\n"
-	TwoEnter InputSeperator = "\n\n"
+	OneEnter InputSeparator = "\n"
+	TwoEnter InputSeparator = "\n\n"
 )
 
-func ReadByLines(inputSource string, seperators ...InputSeperator) ([]string, error) {
+func ReadByLines(inputSource string, seperators ...InputSeparator) ([]string, error) {
 	var result []string
 
-	var seperator InputSeperator = "\n"
+	var seperator InputSeparator = "\n"
 	if len(seperators) == 1 {
 		seperator = seperators[0]
 	}

@@ -10,7 +10,7 @@ import (
 // Y -> paper
 // Z -> scissors
 var (
-	Strenght = map[string]map[string]bool{
+	Strength = map[string]map[string]bool{
 		"X": {
 			"Y": false,
 			"Z": true,
@@ -49,7 +49,7 @@ func (rps *RockPaperScissor) GetTotalScore() (score int) {
 
 		if myself == enemy {
 			strenghtScore = 3
-		} else if Strenght[myself][enemy] {
+		} else if Strength[myself][enemy] {
 			strenghtScore = 6
 		}
 
