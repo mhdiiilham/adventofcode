@@ -9,6 +9,7 @@ import (
 	campcleanup "github.com/mhdiiilham/adventofcode/2022/camp-cleanup"
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
+	suplystack "github.com/mhdiiilham/adventofcode/2022/suply-stack"
 )
 
 func main() {
@@ -61,4 +62,15 @@ func main() {
 	fmt.Printf("total assignment pairs that does one range fully contain the other: %d\n", numbersOfAssignmentThatFullyContainsTheOtherPairAssignment)
 	fmt.Printf("total assignment pairs do the ranges overlap: %d\n", numbersOfAssignmentPairsDoTheRangeOverlap)
 	color.Blue("--------------------")
+
+	color.Green("5. Supply Stacks")
+	suplyStack := suplystack.New("input/2022/suply_stack.txt")
+	if err := suplyStack.LoadInput(); err != nil {
+		log.Fatalf("faile to load suply stack input: %v", err)
+	}
+	crateMover9000 := suplyStack.CrateMover9000()
+	crateMover9001 := suplyStack.CrateMover9001()
+	fmt.Printf("After the rearrangement procedure completes (crateMover9000), crate that ends up on top of each stack: %s \n", crateMover9000)
+	fmt.Printf("After the rearrangement procedure completes (crateMover9001), crate that ends up on top of each stack: %s \n", crateMover9001)
+
 }
