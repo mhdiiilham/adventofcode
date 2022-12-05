@@ -10,18 +10,28 @@ import (
 const input = "../../input/2022/suply_stack_test.txt"
 
 func TestLoadInput(t *testing.T) {
-	assertion := assert.New(t)
-	expectedStacks := map[int][]string{
-		1: {"N", "Z"},
-		2: {"D", "C", "M"},
-		3: {"P"},
-	}
+	t.Run("success", func(t *testing.T) {
+		assertion := assert.New(t)
+		expectedStacks := map[int][]string{
+			1: {"N", "Z"},
+			2: {"D", "C", "M"},
+			3: {"P"},
+		}
 
-	suplyStack := suplystack.New(input)
-	errLoadInput := suplyStack.LoadInput()
-	assertion.NoError(errLoadInput)
-	assertion.Equal(expectedStacks, suplyStack.StackOne)
-	assertion.Equal(expectedStacks, suplyStack.StackTwo)
+		suplyStack := suplystack.New(input)
+		errLoadInput := suplyStack.LoadInput()
+		assertion.NoError(errLoadInput)
+		assertion.Equal(expectedStacks, suplyStack.StackOne)
+		assertion.Equal(expectedStacks, suplyStack.StackTwo)
+	})
+
+	t.Run("failed", func(t *testing.T) {
+		assertion := assert.New(t)
+
+		suplyStack := suplystack.New("input")
+		errLoadInput := suplyStack.LoadInput()
+		assertion.Error(errLoadInput)
+	})
 }
 
 func TestCrateMover9000(t *testing.T) {
