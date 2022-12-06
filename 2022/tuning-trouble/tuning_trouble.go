@@ -56,11 +56,7 @@ func (tt *TuningTrouble) getHowManyCharactersNeedToBeProcessedBeforeTheFirstStar
 
 func copySlice(s []string) []string {
 	var result []string
-
-	for _, v := range s {
-		result = append(result, v)
-	}
-
+	result = append(result, s...)
 	return result
 }
 
