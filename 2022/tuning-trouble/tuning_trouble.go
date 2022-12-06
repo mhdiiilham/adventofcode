@@ -11,6 +11,11 @@ type TuningTrouble struct {
 	Datastream  string
 }
 
+const (
+	packet  = 4
+	message = 14
+)
+
 func New(inputSource string) *TuningTrouble {
 	return &TuningTrouble{InputSource: inputSource}
 }
@@ -26,41 +31,32 @@ func (tt *TuningTrouble) LoadInput() (err error) {
 }
 
 func (tt *TuningTrouble) GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStartOfPacketMarkerDetected() int {
-	return tt.getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(4)
+	return tt.getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(packet)
 }
 
 func (tt *TuningTrouble) GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStartOfMessageDetected() int {
-	return tt.getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(14)
+	return tt.getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(message)
 }
 
-func (tt *TuningTrouble) getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(n int) int {
-	new := []string{}
-	for i, char := range strings.Split(tt.Datastream, "") {
-		new = append(new, char)
-		start := 0
-		end := i
-		if i > n {
-			start = i - n
+func (tt *TuningTrouble) getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(numberOfDistinctChars int) int {
+	dataStream := strings.Split(tt.Datastream, "")
+	for index := range strings.Split(tt.Datastream, "") {
+		sliceStartAt := 0
+		sliceEndAt := index
+
+		if index > numberOfDistinctChars {
+			sliceStartAt = index - numberOfDistinctChars
 		}
 
-		copied := copySlice(new)
-		lastFour := copied[start:end]
-		if unique(lastFour, n) {
-			return i
+		lastFour := dataStream[sliceStartAt:sliceEndAt]
+		if isUnique(lastFour, numberOfDistinctChars) {
+			return index
 		}
-
 	}
 	return 0
-
 }
 
-func copySlice(s []string) []string {
-	var result []string
-	result = append(result, s...)
-	return result
-}
-
-func unique(s []string, n int) bool {
+func isUnique(s []string, numberOfDistinctChars int) bool {
 	for i := 0; i < len(s); i++ {
 		for j := 0; j < len(s); j++ {
 			if s[i] == s[j] && i != j {
@@ -68,6 +64,5 @@ func unique(s []string, n int) bool {
 			}
 		}
 	}
-
-	return len(s) == n
+	return len(s) == numberOfDistinctChars
 }
