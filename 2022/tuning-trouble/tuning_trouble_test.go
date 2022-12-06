@@ -27,16 +27,14 @@ func (suite *tuningTroubleTestSuite) TestLoadInput() {
 		expeceted  error
 	}{
 		{
-			name:       "success",
-			input:      input,
-			dataStream: "mjqjpqmgbljsphdztnvjfqwrcgsmlb",
-			expeceted:  nil,
+			name:      "success",
+			input:     input,
+			expeceted: nil,
 		},
 		{
-			name:       "failed",
-			input:      "hello.txt",
-			dataStream: "",
-			expeceted:  fmt.Errorf("failed to read input file %s", "hello.txt"),
+			name:      "failed",
+			input:     "hello.txt",
+			expeceted: fmt.Errorf("failed to read input file %s", "hello.txt"),
 		},
 	}
 
@@ -46,7 +44,6 @@ func (suite *tuningTroubleTestSuite) TestLoadInput() {
 			tuningtrouble := tuningtrouble.New(tt.input)
 			actual := tuningtrouble.LoadInput()
 			assert.Equal(t, tt.expeceted, actual)
-			assert.Equal(t, tt.dataStream, tuningtrouble.Datastream)
 		})
 	}
 }

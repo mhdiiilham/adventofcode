@@ -7,8 +7,8 @@ import (
 )
 
 type TuningTrouble struct {
-	InputSource string
-	Datastream  string
+	inputSource string
+	dataStream  string
 }
 
 const (
@@ -17,16 +17,16 @@ const (
 )
 
 func New(inputSource string) *TuningTrouble {
-	return &TuningTrouble{InputSource: inputSource}
+	return &TuningTrouble{inputSource: inputSource}
 }
 
 func (tt *TuningTrouble) LoadInput() (err error) {
-	b, err := ioutil.ReadFile(tt.InputSource)
+	b, err := ioutil.ReadFile(tt.inputSource)
 	if err != nil {
-		return fmt.Errorf("failed to read input file %s", tt.InputSource)
+		return fmt.Errorf("failed to read input file %s", tt.inputSource)
 	}
 
-	tt.Datastream = string(b)
+	tt.dataStream = string(b)
 	return nil
 }
 
@@ -39,8 +39,8 @@ func (tt *TuningTrouble) GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStar
 }
 
 func (tt *TuningTrouble) getHowManyCharactersNeedToBeProcessedBeforeTheFirstStart(numberOfDistinctChars int) int {
-	dataStream := strings.Split(tt.Datastream, "")
-	for index := range strings.Split(tt.Datastream, "") {
+	dataStream := strings.Split(tt.dataStream, "")
+	for index := range strings.Split(tt.dataStream, "") {
 		sliceStartAt := 0
 		sliceEndAt := index
 
