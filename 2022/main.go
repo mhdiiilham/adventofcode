@@ -10,6 +10,7 @@ import (
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
 	suplystack "github.com/mhdiiilham/adventofcode/2022/suply-stack"
+	tuningtrouble "github.com/mhdiiilham/adventofcode/2022/tuning-trouble"
 )
 
 func main() {
@@ -72,5 +73,16 @@ func main() {
 	crateMover9001 := suplyStack.CrateMover9001()
 	fmt.Printf("After the rearrangement procedure completes (crateMover9000), crate that ends up on top of each stack: %s \n", crateMover9000)
 	fmt.Printf("After the rearrangement procedure completes (crateMover9001), crate that ends up on top of each stack: %s \n", crateMover9001)
+	color.Blue("--------------------")
 
+	color.Green("6. Tuning Trouble")
+	tuningTrouble := tuningtrouble.New("input/2022/tuning_trouble.txt")
+	if err := tuningTrouble.LoadInput(); err != nil {
+		log.Fatalf("faile to load tuning trouble input: %v", err)
+	}
+	charMarkAfter := tuningTrouble.GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStartOfPacketMarkerDetected()
+	message := tuningTrouble.GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStartOfMessageDetected()
+	fmt.Printf("How many characters need to be processed before the first start-of-packet marker is detected: %d\n", charMarkAfter)
+	fmt.Printf("How many characters need to be processed before the first start-of-message marker is detected: %d\n", message)
+	color.Blue("--------------------")
 }
