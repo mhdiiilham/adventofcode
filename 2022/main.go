@@ -7,6 +7,7 @@ import (
 	"github.com/fatih/color"
 	caloriecounting "github.com/mhdiiilham/adventofcode/2022/calorie-counting"
 	campcleanup "github.com/mhdiiilham/adventofcode/2022/camp-cleanup"
+	nospaceleftondevice "github.com/mhdiiilham/adventofcode/2022/no-space-left-on-device"
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
 	suplystack "github.com/mhdiiilham/adventofcode/2022/suply-stack"
@@ -84,5 +85,16 @@ func main() {
 	message := tuningTrouble.GetHowManyCharactersNeedToBeProcessedBeforeTheFirstStartOfMessageDetected()
 	fmt.Printf("How many characters need to be processed before the first start-of-packet marker is detected: %d\n", charMarkAfter)
 	fmt.Printf("How many characters need to be processed before the first start-of-message marker is detected: %d\n", message)
+	color.Blue("--------------------")
+
+	color.Green("7. No Space Left On Device")
+	noSpaceLeftOnDevice, err := nospaceleftondevice.New("input/2022/nslod.txt")
+	if err != nil {
+		log.Fatalf("failed to load No Space Left On Device input: %v", err)
+	}
+	totalSizeOfDirLookDir := noSpaceLeftOnDevice.GetTotalSizeOfDirectories()
+	totalSizedOfDirNeededToBeRemoved := noSpaceLeftOnDevice.GetTotalSizeDirectoryNeedToDelete()
+	fmt.Printf("the sum of the total sizes of those directories: %d\n", totalSizeOfDirLookDir)
+	fmt.Printf("the total size of the directory that needed to be removed: %d\n", totalSizedOfDirNeededToBeRemoved)
 	color.Blue("--------------------")
 }
