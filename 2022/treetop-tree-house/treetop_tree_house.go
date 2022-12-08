@@ -9,12 +9,13 @@ import (
 )
 
 type Client struct {
-	inputSource string
-	treeMap     [][]string
+	inputSource           string
+	treeMap               [][]string
+	treeVisibilityToEdges map[string][]int
 }
 
 func NewClient(inputSource string) (*Client, error) {
-	c := &Client{inputSource: inputSource}
+	c := &Client{inputSource: inputSource, treeVisibilityToEdges: map[string][]int{}}
 
 	rows, err := input.ReadByLines(c.inputSource, input.OneEnter)
 	if err != nil {
@@ -28,10 +29,9 @@ func NewClient(inputSource string) (*Client, error) {
 	return c, nil
 }
 
-func (c *Client) GetHowManyVisibleTreesAvailableFromOutsideGrid() (int, int) {
+func (c *Client) GetHowManyVisibleTreesAvailableFromOutsideGrid() int {
 	edges := 0
 	count := 0
-	bestViews := map[string][]int{}
 
 	for i := 0; i < len(c.treeMap); i++ {
 		for j := 0; j < len(c.treeMap[i]); j++ {
@@ -92,14 +92,17 @@ func (c *Client) GetHowManyVisibleTreesAvailableFromOutsideGrid() (int, int) {
 				right := countToRight(c.treeMap[i], j)
 				up := countUp(c.treeMap, i, j)
 				down := countDown(c.treeMap, i, j)
-				bestViews[key] = append(bestViews[key], left, right, up, down)
+				c.treeVisibilityToEdges[key] = append(c.treeVisibilityToEdges[key], left, right, up, down)
 			}
 		}
 	}
 
-	fmt.Println(bestViews)
-	max := 0
-	for _, views := range bestViews {
+	return edges + count
+}
+
+func (c *Client) GetHigestScenicScores() int {
+	var score int
+	for _, views := range c.treeVisibilityToEdges {
 		temp := 0
 		for _, view := range views {
 			if view != 0 {
@@ -110,12 +113,11 @@ func (c *Client) GetHowManyVisibleTreesAvailableFromOutsideGrid() (int, int) {
 				}
 			}
 		}
-		if max < temp {
-			max = temp
+		if score < temp {
+			score = temp
 		}
 	}
-	fmt.Println(max)
-	return edges + count, max
+	return score
 }
 
 func countToLeft(trees []string, start int) int {

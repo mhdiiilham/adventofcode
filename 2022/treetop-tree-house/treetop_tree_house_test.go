@@ -9,16 +9,34 @@ import (
 
 const input = "../../input/2022/treetop_tree_house_test.txt"
 
-func TestGetHowManyVisibleTreesAvailableFromOutsideGrid(t *testing.T) {
+func TestTreeTopTreeHouse(t *testing.T) {
 	assertion := assert.New(t)
 	expected := 21
-	expected2 := 8
 
 	c, err := treetoptreehouse.NewClient(input)
 	assertion.NoError(err)
 
-	part1, part2 := c.GetHowManyVisibleTreesAvailableFromOutsideGrid()
-	assertion.Equal(expected, part1, "number of tree that available should be %d", expected)
-	assertion.Equal(expected2, part2, "number of tree that available should be %d", expected2)
+	numberOfTreeVisibleFromOutsideGrid := c.GetHowManyVisibleTreesAvailableFromOutsideGrid()
+	assertion.Equal(expected, numberOfTreeVisibleFromOutsideGrid, "number of tree that visible from outside grid should be %d", expected)
+}
 
+func TestGetHighestSchenicScores(t *testing.T) {
+	assertion := assert.New(t)
+	expected := 8
+
+	c, err := treetoptreehouse.NewClient(input)
+	assertion.NoError(err)
+
+	c.GetHowManyVisibleTreesAvailableFromOutsideGrid()
+	highestScenicScore := c.GetHigestScenicScores()
+	assertion.Equal(expected, highestScenicScore, "the highest scenic score possible for any tree should be %d", expected)
+
+}
+
+func TestFailedReadInput(t *testing.T) {
+	assertion := assert.New(t)
+
+	c, err := treetoptreehouse.NewClient("")
+	assertion.Error(err)
+	assertion.Nil(c)
 }
