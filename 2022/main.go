@@ -104,8 +104,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to load Treetop Tree House input: %v", err)
 	}
-	numberOfTreeAvailables, bestViews := client.GetHowManyVisibleTreesAvailableFromOutsideGrid()
+	numberOfTreeAvailables := client.GetHowManyVisibleTreesAvailableFromOutsideGrid()
+	bestScenicScore := client.GetHigestScenicScores()
 	fmt.Printf("total many trees are visible from outside the grid: %d\n", numberOfTreeAvailables)
-	fmt.Printf("the highest scenic score possible for any tree: %d\n", bestViews)
+	fmt.Printf("the highest scenic score possible for any tree: %d\n", bestScenicScore)
 	color.Blue("--------------------")
 }
