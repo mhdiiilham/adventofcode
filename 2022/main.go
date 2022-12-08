@@ -11,6 +11,7 @@ import (
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
 	suplystack "github.com/mhdiiilham/adventofcode/2022/suply-stack"
+	treetoptreehouse "github.com/mhdiiilham/adventofcode/2022/treetop-tree-house"
 	tuningtrouble "github.com/mhdiiilham/adventofcode/2022/tuning-trouble"
 )
 
@@ -96,5 +97,15 @@ func main() {
 	totalSizedOfDirNeededToBeRemoved := noSpaceLeftOnDevice.GetTotalSizeDirectoryNeedToDelete()
 	fmt.Printf("the sum of the total sizes of those directories: %d\n", totalSizeOfDirLookDir)
 	fmt.Printf("the total size of the directory that needed to be removed: %d\n", totalSizedOfDirNeededToBeRemoved)
+	color.Blue("--------------------")
+
+	color.Green("Day 8: Treetop Tree House")
+	client, err := treetoptreehouse.NewClient("input/2022/treetop_tree_house.txt")
+	if err != nil {
+		log.Fatalf("failed to load Treetop Tree House input: %v", err)
+	}
+	numberOfTreeAvailables, bestViews := client.GetHowManyVisibleTreesAvailableFromOutsideGrid()
+	fmt.Printf("total many trees are visible from outside the grid: %d\n", numberOfTreeAvailables)
+	fmt.Printf("the highest scenic score possible for any tree: %d\n", bestViews)
 	color.Blue("--------------------")
 }
