@@ -7,6 +7,7 @@ import (
 	"github.com/fatih/color"
 	caloriecounting "github.com/mhdiiilham/adventofcode/2022/calorie-counting"
 	campcleanup "github.com/mhdiiilham/adventofcode/2022/camp-cleanup"
+	cathoderaytube "github.com/mhdiiilham/adventofcode/2022/cathoderay-tube"
 	nospaceleftondevice "github.com/mhdiiilham/adventofcode/2022/no-space-left-on-device"
 	rockpaperscissor "github.com/mhdiiilham/adventofcode/2022/rock-paper-scissor"
 	rucksackreorganization "github.com/mhdiiilham/adventofcode/2022/rucksack-reorganization"
@@ -108,5 +109,15 @@ func main() {
 	bestScenicScore := client.GetHigestScenicScores()
 	fmt.Printf("total many trees are visible from outside the grid: %d\n", numberOfTreeAvailables)
 	fmt.Printf("the highest scenic score possible for any tree: %d\n", bestScenicScore)
+	color.Blue("--------------------")
+
+	color.Green("Day 10: Cathode-Ray Tube")
+	cathodeReyTube, err := cathoderaytube.New("input/2022/cathode.txt")
+	if err != nil {
+		log.Fatalf("failed to load Cathode-Ray Tube input: %v", err)
+	}
+	sumOf6SignalStrengtha := cathodeReyTube.GetSumOf6SignalStrengths()
+	fmt.Printf("The sum of these 20th, 60th, 100th, 140th, 180th, and 220th cycles signal strengths: %d\n", sumOf6SignalStrengtha)
+	fmt.Printf("The eight capital letters appear on my CRT: %s\n", cathodeReyTube.GetTheEightCapitalLettersAppered())
 	color.Blue("--------------------")
 }
