@@ -1,4 +1,4 @@
-.PHONY: all build
+.PHONY: run
 
 ## Run function will run current year Advent of Code
 run:

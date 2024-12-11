@@ -11,6 +11,7 @@ import (
 
 func main() {
 	fmt.Println("Advent of code 2024")
+	fmt.Printf("\n")
 
 	if dayOne, err := historianhysteria.NewSolver("input/2024/1.txt"); err == nil {
 		partOne, partTwo := dayOne.Solve()
