@@ -6,6 +6,7 @@ import (
 	historianhysteria "github.com/mhdiiilham/adventofcode/2024/1_historian-hysteria"
 	rednosereport "github.com/mhdiiilham/adventofcode/2024/2_red-nose-report"
 	mullitover "github.com/mhdiiilham/adventofcode/2024/3_mull_it_over"
+	ceressearch "github.com/mhdiiilham/adventofcode/2024/4_ceres_search"
 )
 
 func main() {
@@ -23,6 +24,11 @@ func main() {
 
 	if dayThree, err := mullitover.NewSolver("input/2024/3.txt"); err == nil {
 		partOne, partTwo := dayThree.Solve()
-		fmt.Printf("[Mull It Over]\nResults of the multiplications: %d.\nTotal of enabled multiplications: %d.\n\n.", partOne, partTwo)
+		fmt.Printf("[Mull It Over]\nResults of the multiplications: %d.\nTotal of enabled multiplications: %d.\n\n", partOne, partTwo)
+	}
+
+	if dayFour, err := ceressearch.NewSolver("input/2024/4.txt"); err == nil {
+		partOne, partTwo := dayFour.Solve()
+		fmt.Printf("[Ceres Search]\nTotal 'XMAS' appearance: %d.\nTotal appearance of 'X-MAS': %d.\n\n", partOne, partTwo)
 	}
 }
